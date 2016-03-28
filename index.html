@@ -3,10 +3,43 @@
   <head>
      <meta charset="UTF-8">
      <title>Angular ToDo App</title>
+     <link rel="stylesheet" href="todo.css" />
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+     <script src="angular.js"></script>
      <script src="app.js"></script>
+     <script src="data.js"></script>
   </head>
-  <body>
-    <h1>To Do!</h1>
-  </body>
+
+<main data-ng-controller="todo_controller as vm">
+  <h2>Total Tasks: ${{vm.total_time()}}</h2>
+  <input type ="text" class="form-control" placeholder="Enter Task" data-ng-model="vm.filter_on" />
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Prioritize</td>
+        <th>Task</th>
+        <th>Completion Time (mins)</th>
+        <th>Number of people requested</th>
+        <th>Special Instructions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="task in vm.data">
+        <td>.</td>
+        <td>
+          <a data-ng-href="{{todo.url}}" tabindex="-1">{{todo.task}}</a>
+        </td>
+        <td>${{todo.people_requested}}</td>
+        <td>
+          <input type="number" />
+        </td>
+        <td>{{todo.completion_time}}</td>
+        <td>
+          <input type="text" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</body>
 </html>
