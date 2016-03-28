@@ -24,14 +24,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr data-ng-repeat="task in vm.data">
-        <td>.</td>
+      <tr data-ng-repeat="task in vm.data | task: vm.filter_on">
+        <td>{{$index + 1}}</td>
         <td>
           <a data-ng-href="{{todo.url}}" tabindex="-1">{{todo.task}}</a>
         </td>
-        <td>${{todo.people_requested}}</td>
+        <td>${{todo.people_requested.toFixed(2)}}</td>
         <td>
-          <input type="number" />
+          <input type="number" data-ng-model="todo.completion_time"/>
         </td>
         <td>{{todo.completion_time}}</td>
         <td>
