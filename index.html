@@ -16,19 +16,23 @@
 
 <main data-ng-controller="todo_controller as vm">
   <h2>Total Tasks: ${{vm.total_time()}}</h2>
-  <input type ="text" class="form-control" placeholder="Enter Task" data-ng-model="vm.filter_on" />
-  <table class="table table-striped">
+  <input type ="text" class="radio" placeholder="Enter Task" data-ng-model="vm.filter_on" />
+  <table class="table table-bordered">
     <thead>
       <tr>
+        <td data-ng-click="vm.is_ascending =!(vm.is_ascending)">
+          <span data-ng-if="vm.is_ascending">Forwards</span>
+          <span data-ng-if="vm.is_ascending">Backwards</span>
+        </td>
         <td>Prioritize</td>
-        <th data-ng-click="vm.sort_on = 'task'">Task</th>
-        <th data-ng-click="vm.sort_on = 'completion_time'">Completion Time</th>
-        <th data-ng-click="vm.sort_on ='people_requested'">Number of people requested</th>
-        <th data-ng-click="vm.sort_on = 'special_instructions'">Special Instructions</th>
+        <th data-ng-click="vm.sort_data_by  ('task')">Task</th>
+        <th data-ng-click="vm.sort_data_by  ('completion_time')">Completion Time</th>
+        <th data-ng-click="vm.sort_data_by  ('people_requested')">Number of people requested</th>
+        <th data-ng-click="vm.sort_data_by  ('special_instructions')">Special Instructions</th>
       </tr>
     </thead>
     <tbody>
-      <tr data-ng-repeat="task in vm.data | task: vm.filter_on | orderBy: vm.sort_on">
+      <tr data-ng-repeat="task in vm.data | task: vm.filter_on | orderBy: vm.sort_on : vm.is_ascending">
         <td>{{$index + 1}}</td>
         <td>
           <a data-ng-href="{{todo.url}}" tabindex="-1">{{todo.task}}</a>
@@ -39,7 +43,7 @@
         </td>
         <td>{{todo.completion_time}}</td>
         <td>
-          <input type="text" />
+          <input type="text" data-ng-model="todo.special_instructions" />
         </td>
       </tr>
     </tbody>
