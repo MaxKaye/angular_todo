@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html lang="en">
+  <html>
   <head>
      <meta charset="UTF-8">
      <title>Angular ToDo App</title>
@@ -9,6 +9,10 @@
      <script src="app.js"></script>
      <script src="data.js"></script>
   </head>
+  <body class="container" data-ng-app="todo">
+    <header class="jumbotron">
+      <h1>Todo List</h1>
+    </header>
 
 <main data-ng-controller="todo_controller as vm">
   <h2>Total Tasks: ${{vm.total_time()}}</h2>
@@ -17,14 +21,14 @@
     <thead>
       <tr>
         <td>Prioritize</td>
-        <th>Task</th>
-        <th>Completion Time (mins)</th>
-        <th>Number of people requested</th>
-        <th>Special Instructions</th>
+        <th data-ng-click="vm.sort_on = 'task'">Task</th>
+        <th data-ng-click="vm.sort_on = 'completion_time'">Completion Time</th>
+        <th data-ng-click="vm.sort_on ='people_requested'">Number of people requested</th>
+        <th data-ng-click="vm.sort_on = 'special_instructions'">Special Instructions</th>
       </tr>
     </thead>
     <tbody>
-      <tr data-ng-repeat="task in vm.data | task: vm.filter_on">
+      <tr data-ng-repeat="task in vm.data | task: vm.filter_on | orderBy: vm.sort_on">
         <td>{{$index + 1}}</td>
         <td>
           <a data-ng-href="{{todo.url}}" tabindex="-1">{{todo.task}}</a>

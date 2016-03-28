@@ -8,7 +8,11 @@
   function TodoController(){
     var vm = this;
     vm.data = data;
-    vm.total_time = function(){
+    vm.sort_data_by = function(task){
+      vm.sort_on = task;
+      vm.is_ascending = !(vm.is_ascending);
+    };
+      vm.total_time = function(){
       var total = 0;
       vm.data.forEach(function(todo){
         if(todo.people_requested){
