@@ -14,37 +14,38 @@
       <h1>Todo List</h1>
     </header>
 
-<main data-ng-controller="todo_controller as vm">
+<main data-ng-controller="vm">
   <h2>Total Tasks: ${{vm.total_time()}}</h2>
-  <input type ="text" class="radio" placeholder="Enter Task" data-ng-model="vm.filter_on" />
+  <form data-ng-submit="create()"><input type ="text" class="radio" placeholder="Enter Task" data-ng-model="new_task" /></form>
   <table class="table table-bordered">
     <thead>
       <tr>
-        <td data-ng-click="vm.is_ascending =!(vm.is_ascending)">
+        <!-- <td data-ng-click="vm.is_ascending =!(vm.is_ascending)">
           <span data-ng-if="vm.is_ascending">Forwards</span>
           <span data-ng-if="vm.is_ascending">Backwards</span>
-        </td>
+        </td> -->
         <td>Prioritize</td>
-        <th data-ng-click="vm.sort_data_by  ('task')">Task</th>
+        <td>Task</td>
+        <!-- <th data-ng-click="vm.sort_data_by  ('task')">Task</th>
         <th data-ng-click="vm.sort_data_by  ('completion_time')">Completion Time</th>
         <th data-ng-click="vm.sort_data_by  ('people_requested')">Number of people requested</th>
-        <th data-ng-click="vm.sort_data_by  ('special_instructions')">Special Instructions</th>
+        <th data-ng-click="vm.sort_data_by  ('special_instructions')">Special Instructions</th> -->
       </tr>
     </thead>
     <tbody>
-      <tr data-ng-repeat="task in vm.data | task: vm.filter_on | orderBy: vm.sort_on : vm.is_ascending">
+      <tr data-ng-repeat="task in data">
         <td>{{$index + 1}}</td>
         <td>
-          <a data-ng-href="{{todo.url}}" tabindex="-1">{{todo.task}}</a>
+          <a data-ng-href="{{todo.url}}" tabindex="-1">{{task}}</a>
         </td>
-        <td>${{todo.people_requested.toFixed(2)}}</td>
+        <!-- <td>${{todo.people_requested.toFixed(2)}}</td>
         <td>
           <input type="number" data-ng-model="todo.completion_time"/>
         </td>
         <td>{{todo.completion_time}}</td>
         <td>
           <input type="text" data-ng-model="todo.special_instructions" />
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>
